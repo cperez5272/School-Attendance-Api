@@ -27,7 +27,9 @@ studentsRouter
   .route('/')
   .get((req, res, next) => {
     const knexInstance = req.app.get('db')
+        console.dir(knexInstance);
     StudentsService.getAllStudents(knexInstance)
+    
       .then(students => {
         res.json(students.map(serializeStudent))
       })

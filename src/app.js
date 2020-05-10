@@ -16,7 +16,7 @@ app.use(morgan(morganOption))
 app.use(helmet())
 app.use(cors())
 
-app.use(studentRoutes);
+app.use('/api/students', studentRoutes);
 
 app.get('/', (req, res) => {
     res.send('Hello, school_attendance_api')

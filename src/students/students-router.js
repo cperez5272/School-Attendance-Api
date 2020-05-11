@@ -27,10 +27,11 @@ studentsRouter
   .route('/')
   .get((req, res, next) => {
     const knexInstance = req.app.get('db')
-        console.dir(knexInstance);
+    console.log(students)
     StudentsService.getAllStudents(knexInstance)
     
       .then(students => {
+          console.log(students)
         res.json(students.map(serializeStudent))
       })
       .catch(next)

@@ -17,16 +17,17 @@ const studentsRouter = express.Router()
 const jsonParser = express.json()
 
 const serializeStudent = student => ({
-  id: student.id,
-  firstName: xss(student.firstName),
-  lastName: xss(student.lastName),
-  grade: student.grade,
-})
+    id: student.id,
+    firstName: xss(student.firstname),
+    lastName: xss(student.lastname),
+    grade: student.grade,
+  })
 
 studentsRouter
   .route('/')
   .get((req, res, next) => {
     const knexInstance = req.app.get('db')
+
     StudentsService.getAllStudents(knexInstance)
     
       .then(students => {

@@ -24,42 +24,36 @@ const serializeStudent = student => ({
   })
 
   studentsRouter
-  .route('/')
+  .route('/students')
   .get((req, res, next) => {
-    const knexInstance = req.app.get('db')
+    const knexInstance = req.app.get("db")
 
     StudentsService.getAllStudents(knexInstance)
     
-      .then(students => {
-          console.log(students)
-        res.json(students.map(serializeStudent))
-      })
+      .then(students =>  res.json(students.map(serializeStudent)))
       .catch(next)
   })
 
   studentsRouter
-  .post('/', (req, res, next) => {
+  .post('/students', async (req, res, next) => {
+    console.log(req.body, typeof req.body.grade)
     const { firstName, lastName, grade } = req.body
-    const newStudent = { firstName, lastName, grade };
+    const newStudent = { firstname: firstName, lastname: lastName, grade };
     res.send(newStudent);
-    for (const [key, value] of Object.entries(newStudent))
-      if (value == null)
-        return res.status(400).json({
-          error: { message: `Missing '${key}' in request body` }
-        })
-    StudentsService.insertStudent(
-      req.app.get('db'),
-      newStudent
-    )
-      .then(student => {
-        res
-          .status(201)
-          .location(path.posix.join(req.originalUrl, `/${student.id}`))
-          .json(serializeStudent(student))
-      })
-      .catch(error => {
-        console.dir(error);
-      })
+    try {
+      StudentsService.insertStudent(
+        req.app.get("db"),
+        newStudent
+      )
+    } catch (error) {
+      console.dir(error);
+    }
+    //for (const [key, value] of Object.entries(newStudent))
+    //  if (value == null)
+    //    return res.status(400).json({
+    //      error: { message: `Missing '${key}' in request body` }
+    //    })
+   
   })
   
   studentsRouter

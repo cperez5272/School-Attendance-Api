@@ -17,7 +17,7 @@ app.use(helmet())
 app.use(cors())
 app.use(express.json()); //Used to parse JSON bodies
 
-app.use('/api/students', studentRoutes);
+app.use(studentRoutes);
 
 app.get('/', (req, res) => {
     res.send('Hello, school_attendance_api')

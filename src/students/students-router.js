@@ -6,7 +6,7 @@
 //     res.send(req.app.get('db'));
 // })
 
-// module.exports = router; 
+// module.exports = router;
 
 const express = require('express')
 const path = require('path')
@@ -29,7 +29,7 @@ const serializeStudent = student => ({
     const knexInstance = req.app.get("db")
 
     StudentsService.getAllStudents(knexInstance)
-    
+
       .then(students =>  res.json(students.map(serializeStudent)))
       .catch(next)
   })
@@ -39,12 +39,17 @@ const serializeStudent = student => ({
     console.log(req.body, typeof req.body.grade)
     const { firstName, lastName, grade } = req.body
     const newStudent = { firstname: firstName, lastname: lastName, grade };
-    res.send(newStudent);
+    // res.send(newStudent);
     try {
       StudentsService.insertStudent(
         req.app.get("db"),
         newStudent
-      )
+      ).then(id => {
+        newStudent.id = id;
+        newStudent.firstName = newStudent.firstname;
+        newStudent.lastName = newStudent.lastname;
+        res.send(newStudent);
+      })
     } catch (error) {
       console.dir(error);
     }
@@ -53,9 +58,9 @@ const serializeStudent = student => ({
     //    return res.status(400).json({
     //      error: { message: `Missing '${key}' in request body` }
     //    })
-   
+
   })
-  
+
   studentsRouter
   .route('/:student_id')
   .all((req, res, next) => {
@@ -74,41 +79,15 @@ const serializeStudent = student => ({
       })
       .catch(next)
   })
-  .get((req, res, next) => {
-    res.json(serializeStudent(res.student))
-  })
+  
+  studentsRouter
+  .route('/remove-students')
   .delete((req, res, next) => {
     StudentsService.deleteStudent(
-      req.app.get('db'),
-      req.params.student_id
-    )
-      .then(numRowsAffected => {
-        res.status(204).end()
-      })
-      .catch(next)
+      req.app.get('db')
+    ).then(r => {
+        res.send(r);
+    }).catch(next)
   })
-  .patch(jsonParser, (req, res, next) => {
-    const { firstName, lastName } = req.body
-    const studentToUpdate = { firstName, lastName }
 
-    const numberOfValues = Object.values(studentToUpdate).filter(Boolean).length
-    if (numberOfValues === 0) {
-      return res.status(400).json({
-        error: {
-          message: `Request body must contain 'firstName, lastName'`
-        }
-      })
-    }
-
-    studentsService.updateStudent(
-        req.app.get('db'),
-        req.params.student_id,
-        studentToUpdate
-      )
-      .then(numRowsAffected => {
-        res.status(204).end()
-      })
-      .catch(next)
-    })
-  
-  module.exports = studentsRouter
+  module.exports = studentsRouter;

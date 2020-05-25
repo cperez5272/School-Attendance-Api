@@ -62,6 +62,17 @@ const serializeStudent = student => ({
   })
 
   studentsRouter
+  .route('/remove-students')
+  .delete((req, res, next) => {
+    console.log('jello mello')
+    StudentsService.deleteStudent(
+      req.app.get('db')
+    ).then(r => {
+        res.send(r);
+    }).catch(next)
+  })
+
+  studentsRouter
   .route('/:student_id')
   .all((req, res, next) => {
     StudentsService.getById(
@@ -78,16 +89,6 @@ const serializeStudent = student => ({
         next()
       })
       .catch(next)
-  })
-  
-  studentsRouter
-  .route('/remove-students')
-  .delete((req, res, next) => {
-    StudentsService.deleteStudent(
-      req.app.get('db')
-    ).then(r => {
-        res.send(r);
-    }).catch(next)
   })
 
   module.exports = studentsRouter;

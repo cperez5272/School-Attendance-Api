@@ -68,7 +68,7 @@ const serializeStudent = student => ({
     StudentsService.deleteStudent(
       req.app.get('db')
     ).then(r => {
-        res.send(r);
+        res.send({response: r, status: 204});
     }).catch(next)
   })
 

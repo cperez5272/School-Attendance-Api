@@ -10,8 +10,10 @@ const StudentsService = {
   getById(knex, id) {
     return knex.from("school_attendance_students").select("*").where("id", id).first()
   },
-  deleteStudent(knex, id) {
-    return knex("school_attendance_students").truncate()
+  deleteStudent(knex) {
+    return knex.raw(`
+      DELETE FROM school_attendance_students WHERE firstname IS NOT NULL
+    `)
     
     // .delete("*")
     // .from("school_attendance_students")

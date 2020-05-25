@@ -11,7 +11,6 @@ const StudentsService = {
     return knex.from("school_attendance_students").select("*").where("id", id).first()
   },
   deleteStudent(knex, id) {
-    return knex
     return knex("school_attendance_students").truncate()
     
     // .delete("*")

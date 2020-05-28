@@ -9,3 +9,11 @@ describe('App', () => {
       .expect(200, 'Hello, school_attendance_api')
   })
 })
+
+describe('App', () => {
+  it('GET /students responds with 200 "student added"', () => {
+    return supertest(app)
+    .get('/students')
+    .expect(200, 'student added')
+  })
+})

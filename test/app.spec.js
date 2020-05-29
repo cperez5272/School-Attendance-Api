@@ -10,10 +10,19 @@ describe('App', () => {
   })
 })
 
-describe('App', () => {
-  it('GET /students responds with 200 "student added"', () => {
-    return supertest(app)
-    .get('/students')
-    .expect(200, 'student added')
-  })
-})
+describe('POST /students', function() {
+  it('firstName should be "john"', function(done) {
+    supertest(app)
+      .post('/students')
+      .send('name=john')
+      .set('Accept', 'application/json')
+      .expect(function(res) {
+        res.body.id = 'some fixed id';
+        res.body.firstName = res.body.firstName.toLowerCase();
+      })
+      .expect(200, {
+        id: 'some fixed id',
+        name: 'john'
+      }, done);
+  });
+});

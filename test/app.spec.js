@@ -36,8 +36,8 @@ describe('Post Endpoint', function() {
     supertest(app)
       .post('/students')
       const newAttendance = {
-        firstname: 'Test first name student',
-        lastname: 'Test last name student',
+        firstname: 'john',
+        lastname: 'test',
         grade: 7,
       }
       .send(newAttendance)

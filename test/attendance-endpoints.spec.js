@@ -21,7 +21,7 @@ describe('Attendance Endpoints', function() {
     afterEach('cleanup', () => db.raw('TRUNCATE school_attendance_students RESTART IDENTITY CASCADE'))
   
     describe(`GET /students`, () => {
-        context(`Given no articles`, () => {
+        context(`Given no students`, () => {
             it(`responds with 200 and an empty list`, () => {
             return supertest(app)
                 .get('/students')

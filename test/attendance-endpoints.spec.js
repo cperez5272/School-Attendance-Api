@@ -221,7 +221,7 @@ describe('Attendance Endpoints', function() {
             .then(() => {
               return db
                 .into('school_attendance_students')
-                .insert(testArticles)
+                .insert(testAttendance)
             })
         })
   

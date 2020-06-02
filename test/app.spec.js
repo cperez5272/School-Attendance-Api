@@ -14,7 +14,7 @@ describe('POST /students', function() {
   it('firstName should be "john"', function(done) {
     supertest(app)
       .post('/students')
-      .send('name=john')
+      .send('firstName=john')
       .set('Accept', 'application/json')
       .expect(function(res) {
         res.body.id = 'some fixed id';
@@ -22,7 +22,7 @@ describe('POST /students', function() {
       })
       .expect(200, {
         id: 'some fixed id',
-        name: 'john'
+        firstName: 'john'
       }, done);
   });
 });

@@ -23,10 +23,6 @@ app.get('/', (req, res) => {
     res.send('Hello, school_attendance_api')
 })
 
-// app.post('/students', (req, res) => {
-//     res.send('student added')
-// })
-
 app.use(function errorHandler(error, req, res, next) {
     let response
     console.error(error)

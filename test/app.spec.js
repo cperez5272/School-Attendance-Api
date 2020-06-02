@@ -1,6 +1,7 @@
 const { expect } = require('chai')
 const supertest = require('supertest')
 const app = require('../src/app')
+const knex = require('knex')
 
 describe('App', () => {
   it('GET / responds with 200 containing "school_attendance_api"', () => {
@@ -10,11 +11,36 @@ describe('App', () => {
   })
 })
 
-describe('POST /students', function() {
-  it('firstName should be "john"', function(done) {
+
+
+describe('Post Endpoint', function() {
+  let db
+
+  before('make knex instance', () => {
+    db = knex({
+      client: 'pg',
+      connection: process.env.TEST_DB_URL,
+    })
+    app.set('db', db)
+  })
+
+  after('disconnect from db', () => db.destroy())
+
+  before('clean the table', () => db.raw('TRUNCATE school_attendance_students RESTART IDENTITY CASCADE'))
+
+  afterEach('cleanup', () => db.raw('TRUNCATE school_attendance_students RESTART IDENTITY CASCADE'))
+
+  describe('POST /students', function() {
+
+    it('firstName should be "john"', function(done) {
     supertest(app)
       .post('/students')
-      .send('firstName=john')
+      const newAttendance = {
+        firstname: 'Test first name student',
+        lastname: 'Test last name student',
+        grade: 7,
+      }
+      .send(newAttendance)
       .set('Accept', 'application/json')
       .expect(function(res) {
         res.body.id = 'some fixed id';
@@ -24,5 +50,6 @@ describe('POST /students', function() {
         id: 'some fixed id',
         firstName: 'john'
       }, done);
-  });
+    });
+  })
 });

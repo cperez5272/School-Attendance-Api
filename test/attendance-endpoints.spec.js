@@ -143,7 +143,7 @@ describe('Attendance Endpoints', function() {
         const newAttendance = {
           firstname: 'Test first name student',
           lastname: 'Test last name student',
-        //   grade: 'Test new student grade...'
+          grade: 7,
         }
         return supertest(app)
           .post('/students')

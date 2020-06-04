@@ -34,14 +34,9 @@ describe('Attendance Endpoints', function() {
             const testAttendance = makeAttendanceArray()
 
             beforeEach('insert students', () => {
-              return db
+                return db
                 .into('school_attendance_students')
-                // .insert(testUsers)
-                .then(() => {
-                  return db
-                    .into('school_attendance_students')
-                    .insert(testAttendance)
-                })
+                .insert(testAttendance)
             })
     
             it('responds with 200 and all of the students', () => {

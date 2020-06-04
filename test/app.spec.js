@@ -31,25 +31,27 @@ describe('Post Endpoint', function() {
   afterEach('cleanup', () => db.raw('TRUNCATE school_attendance_students RESTART IDENTITY CASCADE'))
 
   describe('POST /students', function() {
-
-    it('firstName should be "john"', function(done) {
+    const newAttendance = {
+      firstname: 'john',
+      lastname: 'test',
+      grade: 7,
+    }
+    it('firstname should be "john"', function(done) {
     supertest(app)
       .post('/students')
-      const newAttendance = {
-        firstname: 'john',
-        lastname: 'test',
-        grade: 7,
-      }
       .send(newAttendance)
       .set('Accept', 'application/json')
       .expect(function(res) {
-        res.body.id = 'some fixed id';
-        res.body.firstName = res.body.firstName.toLowerCase();
+        // res.body.id = 'some fixed id';
+        res.body.firstname = res.body.firstname.toLowerCase();
+        res.body.lastname = res.body.lastname.toLowerCase();
+        res.body.grade = res.body.grade
       })
       .expect(200, {
-        id: 'some fixed id',
-        firstName: 'john'
-      }, done);
+        // id: 'some fixed id',
+        firstName: 'john',
+        lastName: 'test'
+      }, done());
     });
   })
 });

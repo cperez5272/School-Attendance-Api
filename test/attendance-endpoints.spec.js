@@ -72,68 +72,68 @@ describe('Attendance Endpoints', function() {
         })
     })
   
-    describe(`GET /students/:student_id`, () => {
-        context(`Given no students`, () => {
-        it(`responds with 404`, () => {
-            const studentId = 123456
-            return supertest(app)
-                .get(`/students/${studentId}`)
-                .expect(404, { error: { message: `Student doesn't exist` } })
-        })
-        })
+    // describe(`GET /students/:student_id`, () => {
+    //     context(`Given no students`, () => {
+    //     it(`responds with 404`, () => {
+    //         const studentId = 123456
+    //         return supertest(app)
+    //             .get(`/students/${studentId}`)
+    //             .expect(404, { error: { message: `Student doesn't exist` } })
+    //     })
+    //     })
   
-        context('Given there are students in the database', () => {
-            const testAttendance = makeAttendanceArray()
-            // const testUsers = makeUsersArray()
+    //     context('Given there are students in the database', () => {
+    //         const testAttendance = makeAttendanceArray()
+    //         // const testUsers = makeUsersArray()
 
-            beforeEach('insert articles', () => {
-              return db
-                .into('school_attendance_students')
-                // .insert(testUsers)
-                .then(() => {
-                  return db
-                    .into('school_attendance_students')
-                    .insert(testAttendance)
-                })
-            })
+    //         beforeEach('insert articles', () => {
+    //           return db
+    //             .into('school_attendance_students')
+    //             // .insert(testUsers)
+    //             .then(() => {
+    //               return db
+    //                 .into('school_attendance_students')
+    //                 .insert(testAttendance)
+    //             })
+    //         })
     
-            it('responds with 200 and the specified student', () => {
-            const studentId = 2
-            const expectedAttendance = testAttendance[studentId - 1]
-            return supertest(app)
-                .get(`/students/${studentId}`)
-                .expect(200, expectedAttendance)
-            })
-        })
+    //         it('responds with 200 and the specified student', () => {
+    //         const studentId = 2
+    //         const expectedAttendance = testAttendance[studentId - 1]
+    //         return supertest(app)
+    //             .get(`/students/${studentId}`)
+    //             .expect(200, expectedAttendance)
+    //         })
+    //     })
   
-        context(`Given an XSS attack article`, () => {
-            // const testUsers = makeUsersArray()
-            const { maliciousAttendance, expectedAttendance } = makeMaliciousAttendance()
+    //     context(`Given an XSS attack article`, () => {
+    //         // const testUsers = makeUsersArray()
+    //         const { maliciousAttendance, expectedAttendance } = makeMaliciousAttendance()
 
-            beforeEach('insert malicious article', () => {
-              return db
-                .into('school_attendance_students')
-                // .insert(testUsers)
-                .then(() => {
-                  return db
-                    .into('school_attendance_students')
-                    .insert([ maliciousAttendance ])
-                })
-            })
+    //         beforeEach('insert malicious article', () => {
+    //           return db
+    //             .into('school_attendance_students')
+    //             // .insert(testUsers)
+    //             .then(() => {
+    //               return db
+    //                 .into('school_attendance_students')
+    //                 .insert([ maliciousAttendance ])
+    //             })
+    //         })
     
-            it('removes XSS attack content', () => {
-            return supertest(app)
-                .get(`/students/${maliciousAttendance.id}`)
-                .expect(200)
-                .expect(res => {
-                    expect(res.body.title).to.eql(expectedAttendance.title)
-                    expect(res.body.content).to.eql(expectedAttendance.content)
-                })
-            })
-        })
-    })
+    //         it('removes XSS attack content', () => {
+    //         return supertest(app)
+    //             .get(`/students/${maliciousAttendance.id}`)
+    //             .expect(200)
+    //             .expect(res => {
+    //                 expect(res.body.title).to.eql(expectedAttendance.title)
+    //                 expect(res.body.content).to.eql(expectedAttendance.content)
+    //             })
+    //         })
+    //     })
+    // })
   
-    describe(`a /students`, () => {
+    describe(`POST /students`, () => {
       it(`creates an student, responding with 201 and the new student`, () => {
         const newAttendance = {
           firstName: 'Test first name student',
@@ -167,7 +167,7 @@ describe('Attendance Endpoints', function() {
         const newAttendance = {
           firstName: 'Test first name student',
           lastName: 'Test last name student',
-        //   content: 'Test new article content...'
+        //   content: 'Test new student content...'
         }
   
         it(`responds with 400 and an error message when the '${field}' is missing`, () => {

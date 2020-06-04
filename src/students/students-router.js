@@ -72,23 +72,23 @@ const serializeStudent = student => ({
     }).catch(next)
   })
 
-  studentsRouter
-  .route('/:student_id')
-  .all((req, res, next) => {
-    StudentsService.getById(
-      req.app.get('db'),
-      req.params.student_id
-    )
-      .then(student => {
-        if (!student) {
-          return res.status(404).json({
-            error: { message: `Student doesn't exist` }
-          })
-        }
-        res.student = student
-        next()
-      })
-      .catch(next)
-  })
+  // studentsRouter
+  // .route('/:student_id')
+  // .all((req, res, next) => {
+  //   StudentsService.getById(
+  //     req.app.get('db'),
+  //     req.params.student_id
+  //   )
+  //     .then(student => {
+  //       if (!student) {
+  //         return res.status(404).json({
+  //           error: { message: `Student doesn't exist` }
+  //         })
+  //       }
+  //       res.student = student
+  //       next()
+  //     })
+  //     .catch(next)
+  // })
 
   module.exports = studentsRouter;

@@ -14,11 +14,6 @@ const StudentsService = {
     return knex.raw(`
       DELETE FROM school_attendance_students WHERE firstname IS NOT NULL
     `)
-    
-    // .delete("*")
-    // .from("school_attendance_students")
-
-    // .del().then(res => console.log(res))
   },
 }
 

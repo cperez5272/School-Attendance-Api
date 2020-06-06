@@ -1,26 +1,18 @@
-# Express Boilerplate!
+# School Attendance App
 
-This is a boilerplate project used for starting new projects!
+Live Link: 
+school-attendance-app.cperez5272.now.sh
 
-## Set up
+https://imgur.com/8OIJHNS
 
-Complete the following steps to start a new project (NEW-PROJECT-NAME):
+- This will be the main page where students will sign in with their name depending on what grade level they are in. This tool is used so that staff can also see how many students they have and sign them in themselves if it is nessesary. 
 
-1. Clone this repository to your local machine `git clone BOILERPLATE-URL NEW-PROJECTS-NAME`
-2. `cd` into the cloned repository
-3. Make a fresh start of the git history for this project with `rm -rf .git && git init`
-4. Install the node dependencies `npm install`
-5. Move the example Environment file to `.env` that will be ignored by git and read by the express server `mv example.env .env`
-6. Edit the contents of the `package.json` to use NEW-PROJECT-NAME instead of `"name": "express-boilerplate",`
+https://imgur.com/YWCpZIL
 
-## Scripts
+- This is where students will sign their names in. Once they submit, their name will be listed depending on the grade level they have chosen. 
 
-Start the application `npm start`
+https://imgur.com/aXRkYEK
 
-Start nodemon for the application `npm run dev`
+- Home where staff members can see all students instead of checking by grade. This is the place where if they need to document the student on paper, they can get everyone in one spot. It is also the same place where they can clear the attendance for a new day if needed. 
 
-Run the tests `npm test`
-
-## Deploying
-
-When your new project is ready for deployment, add a new Heroku application with `heroku create`. This will make a new git remote called "heroku" and you can then `npm run deploy` which will push to this remote's master branch.
+Technology Used: React, CSS, Node, Express, and PostgreSQL.

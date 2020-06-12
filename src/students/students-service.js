@@ -1,10 +1,15 @@
 const StudentsService = {
   getAllStudents(knex) {
-    return knex.select("*").from("school_attendance_students")
+    const students = knex.select("*").from("school_attendance_students").then(r => {
+      console.log('RESPONSE IN GETALL', r);
+      return r;
+    })
+    return students;
   },
   insertStudent(knex, newStudent) {
     return knex("school_attendance_students").insert(newStudent).returning("id").then(id => {
-      return id
+      newStudent.id = id[0];
+      return newStudent;
     })
   },
   getById(knex, id) {

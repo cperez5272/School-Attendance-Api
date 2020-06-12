@@ -8,19 +8,17 @@ const jsonParser = express.json()
 
 const serializeStudent = student => ({
     id: student.id,
-    firstName: xss(student.firstName),
-    lastName: xss(student.lastName),
+    firstName: student.firstName,
+    lastName: student.lastName,
     grade: student.grade,
   })
 
   studentsRouter
   .route('/students')
   .get((req, res, next) => {
-    const knexInstance = req.app.get("db")
-
+    const knexInstance = req.app.get("db");
     StudentsService.getAllStudents(knexInstance)
-
-      .then(students =>  res.json(students.map(serializeStudent)))
+      .then(students =>  res.json(students))
       .catch(next)
   })
 
@@ -33,11 +31,8 @@ const serializeStudent = student => ({
       StudentsService.insertStudent(
         req.app.get("db"),
         newStudent
-      ).then(id => {
-        newStudent.id = id;
-        newStudent.firstName = newStudent.firstname;
-        newStudent.lastName = newStudent.lastname;
-        res.send(newStudent);
+      ).then(r => {
+        res.send(r);
       })
     } catch (error) {
       console.dir(error);

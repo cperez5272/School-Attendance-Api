@@ -24,7 +24,6 @@ const serializeStudent = student => ({
 
   studentsRouter
   .post('/students', async (req, res, next) => {
-    console.log(req.body, typeof req.body.grade)
     const { firstName, lastName, grade } = req.body
     const newStudent = { firstname: firstName, lastname: lastName, grade };
     try {
@@ -42,7 +41,6 @@ const serializeStudent = student => ({
   studentsRouter
   .route('/remove-students')
   .delete((req, res, next) => {
-    console.log('jello mello')
     StudentsService.deleteStudent(
       req.app.get('db')
     ).then(r => {

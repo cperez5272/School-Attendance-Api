@@ -1,7 +1,6 @@
 const StudentsService = {
   getAllStudents(knex) {
     const students = knex.select("*").from("school_attendance_students").then(r => {
-      console.log('RESPONSE IN GETALL', r);
       return r;
     })
     return students;

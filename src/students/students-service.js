@@ -16,7 +16,7 @@ const StudentsService = {
   },
   deleteStudent(knex) {
     return knex.raw(`
-      DELETE FROM school_attendance_students WHERE firstname IS NOT NULL
+      DELETE FROM school_attendance_students WHERE first_name IS NOT NULL
     `)
   },
 }

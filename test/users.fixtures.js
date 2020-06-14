@@ -1,13 +1,13 @@
 function makeUsersArray() {
     return [
         {
-            firstname: 'cesar',
-            lastname: 'perez',
+            first_name: 'cesar',
+            last_name: 'perez',
             grade: 6
         },
         {
-            firstname: 'miguel',
-            lastname: 'law',
+            first_name: 'miguel',
+            last_name: 'law',
             grade: 8
         }
     ]

@@ -32,25 +32,25 @@ describe('Post Endpoint', function() {
 
   describe('POST /students', function() {
     const newAttendance = {
-      firstname: 'john',
-      lastname: 'test',
+      first_name: 'john',
+      last_name: 'test',
       grade: 7,
     }
-    it('firstname should be "john"', function(done) {
+    it('first_name should be "john"', function(done) {
     supertest(app)
       .post('/students')
       .send(newAttendance)
       .set('Accept', 'application/json')
       .expect(function(res) {
         // res.body.id = 'some fixed id';
-        res.body.firstname = res.body.firstname.toLowerCase();
-        res.body.lastname = res.body.lastname.toLowerCase();
+        res.body.first_name = res.body.first_name.toLowerCase();
+        res.body.last_name = res.body.last_name.toLowerCase();
         res.body.grade = res.body.grade
       })
       .expect(200, {
         // id: 'some fixed id',
-        firstName: 'john',
-        lastName: 'test'
+        first_name: 'john',
+        last_name: 'test'
       }, done());
     });
   })

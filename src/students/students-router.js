@@ -8,8 +8,8 @@ const jsonParser = express.json()
 
 const serializeStudent = student => ({
     id: student.id,
-    firstName: student.firstName,
-    lastName: student.lastName,
+    first_name: student.first_name,
+    last_name: student.last_name,
     grade: student.grade,
   })
 
@@ -24,8 +24,8 @@ const serializeStudent = student => ({
 
   studentsRouter
   .post('/students', async (req, res, next) => {
-    const { firstName, lastName, grade } = req.body
-    const newStudent = { firstname: firstName, lastname: lastName, grade };
+    const { first_name, last_name, grade } = req.body
+    const newStudent = { first_name: first_name, last_name: last_name, grade };
     try {
       StudentsService.insertStudent(
         req.app.get("db"),

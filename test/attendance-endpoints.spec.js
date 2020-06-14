@@ -72,8 +72,8 @@ describe('Attendance Endpoints', function() {
     describe(`POST /students`, () => {
       it(`creates an student, responding with 201 and the new student`, function(done) {
         const newAttendance = {
-          firstName: 'Test first name student',
-          lastName: 'Test last name student',
+          first_name: 'Test first name student',
+          last_name: 'Test last name student',
           grade: 7,
         }
         return supertest(app)
@@ -81,8 +81,8 @@ describe('Attendance Endpoints', function() {
           .send(newAttendance)
           .expect(201)
           .expect(res => {
-            expect(res.body.firstName).to.eql(newAttendance.firstName)
-            expect(res.body.lastName).to.eql(newAttendance.lastName)
+            expect(res.body.first_name).to.eql(newAttendance.first_name)
+            expect(res.body.last_name).to.eql(newAttendance.last_name)
           }, done())
           .then(res =>
             supertest(app)
@@ -91,12 +91,12 @@ describe('Attendance Endpoints', function() {
           )
       })
 
-      const requiredFields = ['firstName', 'lastName', 'grade']
+      const requiredFields = ['first_name', 'last_name', 'grade']
   
       requiredFields.forEach(field => {
         const newAttendance = {
-          firstName: 'Test first name student',
-          lastName: 'Test last name student',
+          first_name: 'Test first name student',
+          last_name: 'Test last name student',
           grade: 6
         }
   

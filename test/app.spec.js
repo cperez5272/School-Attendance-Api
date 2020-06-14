@@ -42,13 +42,11 @@ describe('Post Endpoint', function() {
       .send(newAttendance)
       .set('Accept', 'application/json')
       .expect(function(res) {
-        // res.body.id = 'some fixed id';
         res.body.first_name = res.body.first_name.toLowerCase();
         res.body.last_name = res.body.last_name.toLowerCase();
         res.body.grade = res.body.grade
       })
       .expect(200, {
-        // id: 'some fixed id',
         first_name: 'john',
         last_name: 'test'
       }, done());

@@ -1,4 +1,0 @@
-NODE_ENV=development
-PORT=8000
-DATABASE_URL="postgresql://pawnee_parks_department@localhost/school_attendance_api"
-TEST_DB_URL="postgresql://postgres@localhost/school_attendance_api_test"

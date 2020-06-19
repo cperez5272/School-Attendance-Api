@@ -16,3 +16,72 @@ https://imgur.com/aXRkYEK
 - Home where staff members can see all students instead of checking by grade. This is the place where if they need to document the student on paper, they can get everyone in one spot. It is also the same place where they can clear the attendance for a new day if needed. 
 
 Technology Used: React, CSS, Node, Express, and PostgreSQL.
+
+API DOCUMENTATION: 
+
+Get Student Data:
+
+URL: /students
+METHOD: GET
+Auth required : NO
+
+Success Response: If you have a list of students, for example; Jake Roberts and Linda Prince...
+Code : 200 OK
+Content :
+ {
+            "id": 11,
+            "first_name": "Jake"
+            "last_name": "Roberts"
+            "Grade": 6
+        },
+ {
+            "id": 11,
+            "first_name": "Linda"
+            "last_name": "Prince"
+            "Grade": 7
+        }
+
+Error Response: If you do not have any students listed it will just remain blank or rather just [].
+
+===
+
+Post Student Data: 
+
+URL: /students
+METHOD: POST
+Auth required : NO
+
+Required Fields: Once you try to head to the form it is important that you type the first_name of the student and their last_name. 
+
+Success Response: 
+Code: 200 OK
+ {
+            "id": 11,
+            "first_name": "Sample"
+            "last_name": "Example"
+            "Grade": 6
+        },
+
+Error Response (misses first name for example): 
+{
+    "error": {
+        "message": "Missing 'first_name' in request body"
+    }
+}
+
+===
+
+URL: /remove-students
+
+Method : DELETE
+
+Auth required : NO
+
+Success Response
+Condition : If the list of students exists.
+
+Code: 204 NO CONTENT
+
+Content: {}
+
+Error Response: You would need a list of students first to remove anything. Clicking clear attendance would do nothing if there are no students. 

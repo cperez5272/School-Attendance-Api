@@ -7,7 +7,7 @@ Summary
 - This app is used for students who are in a after school program to sign their name in a laptop as a way to mark their attendance. This is important so staff members can know what students they have during the day. They can check based on a student grade level or just look at an entire list of students who signed up for the day. This is better than them using a sheet of paper because if they ever need confirmation that someone has come in today they can just use their phone. 
 
 ![Image One](https://imgur.com/8OIJHNS)
-<img src="https://imgur.com/8OIJHNS" alt="image-one"> 
+<img src="attendance1.png" alt="image-one"> 
 
 - This will be the main page where students will sign in with their name depending on what grade level they are in. This tool is used so that staff can also see how many students they have and sign them in themselves if it is nessesary. 
 
